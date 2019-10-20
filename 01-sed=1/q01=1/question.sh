@@ -35,3 +35,28 @@
 ##
 ##  >>> Escriba su codigo a partir de este punto <<<
 ##
+#!/bin/bash
+# Pone el 20
+sed 's/\/\([0-9][0-9]\);/\/20\1;/' data.csv > data_out.txt ##
+## Cambia posiciones
+sed -i 's/\([0-9]*\)\/\([0-9]*\)\/\([0-9]*\)/\3-\2-\1/' data_out.txt ##
+## Completa los numeros sin cero
+sed -i 's/-\([0-9]\)-\([0-9]\);/-0\1-0\2;/' data_out.txt ##
+## Agregar nulos \N
+sed -i 's/;;/;\\N;/' data_out.txt ##
+sed -i 's/;N;/;\\N;/' data_out.txt ##
+sed -i 's/;n/;\\N/' data_out.txt ##
+sed -i 's/;\\n;/;\\N;/' data_out.txt ##
+## Cambiar punto y coma por comas
+sed -i 's/,/./g' data_out.txt ##
+sed -i 's/;/,/g' data_out.txt ##
+sed -i 's/,$/,\\N/g' data_out.txt ##
+## Cambia de minúsculas a mayúsculas
+sed -i 's/a/A/'  data_out.txt ##
+sed -i 's/b/B/'  data_out.txt ##
+sed -i 's/c/C/'  data_out.txt ##
+## Pone \N al final 5ta linea
+sed -i '5 s/\N,/\N,\\N/2'  data_out.txt ##
+## Pone \N al final 7ma linea
+sed -i '7 s/\N,/\N,\\N/1' data_out.txt ##
+cat data_out.txt ##
